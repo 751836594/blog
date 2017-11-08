@@ -5,7 +5,7 @@ __pycache__/
 *$py.class
 relwords.venv
 .idea
-blog_env
+#blog_env
 # C extensions
 *.so
 src/config/
@@ -17,7 +17,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
@@ -25,7 +25,7 @@ var/
 wheels/
 *.egg-info/
 .installed.cfg
-*.egg
+#*.egg
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
