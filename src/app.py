@@ -24,4 +24,7 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run('127.0.0.1', '5000')
+    from werkzeug.contrib.fixers import ProxyFix
+
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+    app.run()
