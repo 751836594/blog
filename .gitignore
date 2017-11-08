@@ -5,6 +5,7 @@ __pycache__/
 *$py.class
 relwords.venv
 .idea
+blog_env
 # C extensions
 *.so
 src/config/
