@@ -8,12 +8,14 @@
 @contact: 751836594@qq.com
 @site: 
 @software: PyCharm
-@file: app.py
-@time: 2017/11/2 下午9:05
+@file: __init__.py
+@time: 2017/12/13 下午2:26
 """
 
-from main import app
+
+def func():
+    pass
+
 
 if __name__ == '__main__':
-    app.run('127.0.0.1')
-    app.config.from_pyfile('../config/online.py')
+    pass

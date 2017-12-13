@@ -1,6 +1,17 @@
 {% extends  'layout.html' %}
 {% block body %}
     <!-- CSS -->
+    <style>
+        #guid {
+            background: -moz-linear-gradient(top, #ffffff 0%, #000000 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #000000));
+            background: -webkit-linear-gradient(top, #ffffff 0%, #000000 100%);
+            background: -o-linear-gradient(top, #ffffff 0%, #000000 100%);
+            background: -ms-linear-gradient(top, #ffffff 0%, #000000 100%);
+            background: linear-gradient(to bottom, #ffffff 0%, #000000 100%);
+            height: 1200px;
+        }
+    </style>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/form-elements.css') }}">
@@ -15,8 +26,8 @@
     <link rel="apple-touch-icon-precomposed"
           href="{{ url_for('static', filename='assets/ico/apple-touch-icon-57-precomposed.png') }}">
     <!-- Top content -->
-    <div class="top-content">
-        <div class="inner-bg" style="padding: 0">
+    <div class="top-content" id="guid">
+        <div class="inner-bg">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 form-box">
@@ -50,15 +61,7 @@
                     <div class="col-sm-6 col-sm-offset-3 social-login">
                         <h3>...or login with:</h3>
                         <div class="social-login-buttons">
-                            <a class="btn btn-link-1 btn-link-1-facebook" href="#">
-                                <i class="fa fa-qq">QQ</i>
-                            </a>
-                            <a class="btn btn-link-1 btn-link-1-wx" href="#">
-                                <i class="fa  fa-weixin">微信</i>
-                            </a>
-                            <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-                                <i class="fa fa-weibo"></i>微博
-                            </a>
+                            <span id="qqLoginBtn"></span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +71,19 @@
     </div>
     <script src="{{ url_for('static', filename='assets/js/jquery.backstretch.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/scripts.js') }}"></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+            data-appid="{{ auth_list['qq']['APPID'] }}" data-redirecturi="{{ auth_list['qq']['REDIRECTURI'] }}"
+            charset="utf-8"></script>
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
     <![endif]-->
+
+    <script>
+        $(function () {
+            QC.Login({
+                btnId: "qqLoginBtn",   //插入按钮的节点id
+                size: "B_M",
+            });
+        })
+    </script>
 {% endblock %}
