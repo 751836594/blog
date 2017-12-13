@@ -80,12 +80,20 @@
 
     <script>
         $(function () {
+            //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
             QC.Login({
-                btnId: "qqLoginBtn",   //插入按钮的节点id
+                //btnId：插入按钮的节点id，必选
+                btnId: "qqLoginBtn",
+                //用户需要确认的scope授权项，可选，默认all
+                scope: "all",
+                //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
                 size: "B_M"
-            });
-
-{#            QC.api('get_user_info', {access_token:}, fmt, method)#}
+            }, function (reqData, opts) {//登录成功
+                console.log(reqData);
+                console.log(opts);
+            }, function (opts) {//注销成功
+                alert('QQ登录 注销成功');
+            })
         })
     </script>
 {% endblock %}
