@@ -15,6 +15,7 @@ import json
 import urllib
 import urllib.request
 
+from flask import redirect
 from flask import render_template
 from flask import request
 
@@ -36,4 +37,12 @@ def login():
 
 @app.route('/site/auth', methods=['POST', 'GET'])
 def auth_qq():
-    return render_template('qq.html')
+    auth_list = get_detail('qq')
+    code = request.args.get('code')
+    if code:
+        url = ""
+    else:
+        url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s' % (
+            auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
+
+    return redirect(url)
