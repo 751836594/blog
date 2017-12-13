@@ -23,8 +23,9 @@ def hello_world():
     return render_template('index.html')
 
 
-if __name__ == '__main__':
-    from werkzeug.contrib.fixers import ProxyFix
+@app.route('/login/index')
+def login():
+    return render_template('login.html')
 
-    app.wsgi_app = ProxyFix(app.wsgi_app)
+if __name__ == '__main__':
     app.run('127.0.0.1')
