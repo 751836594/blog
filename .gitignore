@@ -8,7 +8,7 @@ relwords.venv
 #blog_env
 # C extensions
 *.so
-src/config/
+#src/config/
 # Distribution / packaging
 .Python
 build/
