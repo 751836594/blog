@@ -37,24 +37,24 @@ def login():
 
 @app.route('/site/auth', methods=['POST', 'GET'])
 def auth_qq():
-    auth_list = get_detail('qq')
-    code = request.args.get('code')
-    auth_list = get_detail('qq')
     code = request.args.get('code')
     if not code:
-        get_code_url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%s&redirect_uri=%s' % (
-            auth_list['APPID'], auth_list['REDIRECTURI'])
-        return redirect(get_code_url)
+        # 获取code
+        url = get_qq_code_url()
+        return redirect(url)
     else:
-        get_access_token_url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s' % (
-            auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
-        resp = urllib.request.urlopen(get_access_token_url)
+        # 获取access_token
+        url = get_qq_access_token_url(code)
+        resp = urllib.request.urlopen(url)
         v = resp.read().decode('utf8')
         access_token = v[13:45]
-        get_open_id_url = "https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token)
-        res = urllib.request.urlopen(get_open_id_url).read().decode()
+
+        # 获取openid
+        o_url = get_qq_open_id_url(access_token)
+        res = urllib.request.urlopen(o_url).read().decode()
         s_index = res.find('openid')
         start_index = s_index + 9
         end_index = s_index + 9 + 32
-        s = res[start_index:end_index]
-        return s
+        openid = res[start_index:end_index]
+
+        return openid
