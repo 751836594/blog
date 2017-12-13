@@ -42,8 +42,10 @@ def auth_qq():
     if not code:
         url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%s&redirect_uri=%s' % (
             auth_list['APPID'], auth_list['REDIRECTURI'])
+        return redirect(url)
     else:
         url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s' % (
             auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
-
-    return redirect(url)
+        resp = urllib.request.urlopen(url)
+        s = resp.read()
+        json.dumps(dict(s))
