@@ -54,4 +54,4 @@ def auth_qq():
         get_open_id_url = "https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token)
 
         res = urllib.request.urlopen(get_open_id_url).read()
-        print(res)
+        return res
