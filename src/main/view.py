@@ -50,7 +50,7 @@ def auth_qq():
             auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
         resp = urllib.request.urlopen(get_access_token_url)
         v = resp.read().decode('utf8')
-        access_token = resp.read()[13:45]
+        access_token = v[13:45]
         get_open_id_url = "https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token)
         res = urllib.request.urlopen(get_open_id_url).read()
         return json.dumps({'resp': str(v), 'access_token': str(access_token), 'res': res.decode('utf8')})
