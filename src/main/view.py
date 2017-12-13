@@ -36,6 +36,4 @@ def login():
 
 @app.route('/site/auth', methods=['POST', 'GET'])
 def auth_qq():
-    access_token = request.args.get('access_token')
-    resp = urllib.request.urlopen("https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token))
-    return json.dumps(resp)
+    return render_template('qq.html')

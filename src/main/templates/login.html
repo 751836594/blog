@@ -82,8 +82,10 @@
         $(function () {
             QC.Login({
                 btnId: "qqLoginBtn",   //插入按钮的节点id
-                size: "B_M",
+                size: "B_M"
             });
+
+{#            QC.api('get_user_info', {access_token:}, fmt, method)#}
         })
     </script>
 {% endblock %}
