@@ -12,8 +12,11 @@
 @time: 2017/12/13 上午11:18
 """
 import json
+import urllib
+import urllib.request
 
 from flask import render_template
+from flask import request
 
 from biz.auth import *
 from . import app
@@ -31,7 +34,8 @@ def login():
     return render_template('login.html', auth_list=auth_list, host=HOST)
 
 
-@app.route('/site/auth')
+@app.route('/site/auth', methods=['POST', 'GET'])
 def auth_qq():
-    return render_template('''<script type="text/javascript"
-src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>''')
+    access_token = request.args.get('access_token')
+    resp = urllib.request.urlopen("https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token))
+    return json.dumps(resp)
