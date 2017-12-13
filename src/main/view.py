@@ -52,5 +52,9 @@ def auth_qq():
         v = resp.read().decode('utf8')
         access_token = v[13:45]
         get_open_id_url = "https://graph.qq.com/oauth2.0/me?access_token=%s" % (access_token)
-        res = urllib.request.urlopen(get_open_id_url).read()
-        return json.dumps({'resp': str(v), 'access_token': str(access_token), 'res': res.decode('utf8')})
+        res = urllib.request.urlopen(get_open_id_url).read().decode()
+        s_index = res.find('openid')
+        start_index = s_index + 9
+        end_index = s_index + 9 + 32
+        s = res[start_index:end_index]
+        return s
