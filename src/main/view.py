@@ -11,7 +11,6 @@
 @file: view.py
 @time: 2017/12/13 上午11:18
 """
-import json
 import urllib
 import urllib.request
 
@@ -19,7 +18,9 @@ from flask import redirect
 from flask import render_template
 from flask import request
 
+from biz import user
 from biz.auth import *
+from tools.helper import create_conn
 from . import app
 
 
@@ -57,4 +58,9 @@ def auth_qq():
         end_index = s_index + 9 + 32
         openid = res[start_index:end_index]
 
-        return openid
+        is_exist = user.is_exist(openid)
+        if not is_exist:
+            return '已存在'
+
+        uid = user.add(openid)
+        return '新增用户uid:%d' % (uid)
