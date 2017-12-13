@@ -12,20 +12,7 @@
 @time: 2017/11/2 下午9:05
 """
 
-from flask import Flask
-from flask import render_template
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
-
-
-@app.route('/login/index')
-def login():
-    return render_template('login.html')
+from main import app
 
 if __name__ == '__main__':
     app.run('127.0.0.1')
