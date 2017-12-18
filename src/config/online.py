@@ -16,7 +16,7 @@ db_config = {
     'host': '172.17.0.2',
     'db': 'blog',  # www
     'user': 'root',
-    'passwd': 'lujunwen',
+    'passwd': 'GpshzCccms-2',
     'charset': 'utf8',
     'port': 3306,
 }
