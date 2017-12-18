@@ -43,12 +43,13 @@ def add(qq_open_id):
     :param qq_open_id:
     :return:
     """
+    uuid_str = uuid.uuid1()
     params = {
         'qq_open_id': qq_open_id,
-        'uuid': uuid.uuid1(),
-        'create_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
+        'uuid': uuid_str,
+        'create_timse': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
         'last_login_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
     }
 
     uid = insert_rs(conn, 'user', params)
-    return uid
+    return {'uid': uid, 'uuid': uuid_str}
