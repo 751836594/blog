@@ -47,7 +47,7 @@ def add(qq_open_id):
     params = {
         'qq_open_id': qq_open_id,
         'uuid': uuid_str,
-        'create_timse': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
+        'create_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
         'last_login_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
     }
 
