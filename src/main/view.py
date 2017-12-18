@@ -59,7 +59,7 @@ def auth_qq():
         openid = res[start_index:end_index]
 
         is_exist = user.is_exist(openid)
-        if not is_exist:
+        if is_exist:
             return '已存在'
 
         uid = user.add(openid)
