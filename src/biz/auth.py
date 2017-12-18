@@ -33,10 +33,7 @@ def get_qq_code_url():
 
 
 def get_qq_access_token_url(code):
-    auth_list = get_detail('qq')
-    url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s' % (
-        auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
-    return url
+    return ''
 
 
 def get_qq_open_id_url(access_token):
