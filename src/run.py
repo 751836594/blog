@@ -15,5 +15,5 @@
 from main import app
 
 if __name__ == '__main__':
-    app.run('0.0.0.0',port=80)
+    app.run('0.0.0.0',port=8000)
     app.config.from_pyfile('../config/online.py')
