@@ -46,7 +46,7 @@ def auth_qq():
     else:
         # 获取access_token
         access_token_url = get_qq_access_token_url(code)
-        resp = urllib.request.urlopen(access_token_url)
+        resp = urllib.request.urlopen(str(access_token_url))
         v = resp.read().decode('utf8')
         access_token = v[13:45]
 
