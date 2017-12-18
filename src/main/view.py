@@ -71,5 +71,5 @@ def auth_qq():
             expires_time = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
 
         resp = make_response(render_template('auth.html'))
-        resp.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
+        resp.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='www.lujunwen.com')
         return resp
