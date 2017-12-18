@@ -45,9 +45,7 @@ def auth_qq():
         return redirect(code_url)
     else:
         # 获取access_token
-        auth_list = get_detail('qq')
-        access_token_url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s' % (
-            auth_list['APPID'], auth_list['APPKey'], code, auth_list['REDIRECTURI'])
+        access_token_url = get_qq_access_token_url(code)
         resp = urllib.request.urlopen(access_token_url)
         v = resp.read().decode('utf8')
         access_token = v[13:45]
