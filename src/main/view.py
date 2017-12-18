@@ -14,13 +14,14 @@
 import urllib
 import urllib.request
 
+from datetime import timedelta, datetime
 from flask import redirect
 from flask import render_template
-from flask import request
+from flask import request, Response
+from urllib3 import response
 
-from biz import user
+from biz import user, login as _login
 from biz.auth import *
-from tools.helper import create_conn
 from . import app
 
 
@@ -44,6 +45,7 @@ def auth_qq():
         code_url = get_qq_code_url()
         return redirect(code_url)
     else:
+        return
         # 获取access_token
         access_token_url = get_qq_access_token_url(code)
         resp = urllib.request.urlopen(access_token_url)
@@ -58,9 +60,11 @@ def auth_qq():
         end_index = s_index + 9 + 32
         openid = res[start_index:end_index]
 
-        is_exist = user.is_exist(openid)
-        if is_exist:
-            return '已存在'
+        result = user.is_exist(openid)
+        if result['status']:
+            login_cookie_uuid = _login.set_login(result['uuid'])
+            expires_time = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+            Response.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
 
         uid = user.add(openid)
         return '新增用户uid:%d' % (uid)

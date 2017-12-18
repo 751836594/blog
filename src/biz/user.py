@@ -34,7 +34,7 @@ def is_exist(qq_open_id):
     if result:
         status = True
 
-    return status
+    return {'status': status, 'result': result}
 
 
 def add(qq_open_id):
