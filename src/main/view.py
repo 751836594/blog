@@ -14,6 +14,7 @@
 import urllib
 import urllib.request
 
+import requests
 from flask import redirect
 from flask import render_template
 from flask import request
@@ -46,7 +47,8 @@ def auth_qq():
     else:
         # 获取access_token
         access_token_url = get_qq_access_token_url(code)
-        resp = urllib.request.urlopen(str(access_token_url))
+        resp = requests.get(access_token_url)
+        return resp
         v = resp.read().decode('utf8')
         access_token = v[13:45]
 
