@@ -57,10 +57,10 @@ def auth_qq():
         start_index = s_index + 9
         end_index = s_index + 9 + 32
         openid = res[start_index:end_index]
-        return openid
-        # is_exist = user.is_exist(openid)
-        # if not is_exist:
-        #     return '已存在'
-        #
-        # uid = user.add(openid)
-        # return '新增用户uid:%d' % (uid)
+
+        is_exist = user.is_exist(openid)
+        if not is_exist:
+            return '已存在'
+
+        uid = user.add(openid)
+        return '新增用户uid:%d' % (uid)
