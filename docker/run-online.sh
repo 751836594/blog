@@ -27,7 +27,7 @@ docker run \
         \
         -v `pwd`/:/blog \
         -v `pwd`/docker/online/etc/:/blog/etc \
-        -p 80:80 \
+        -p 80:8000 \
         -d --restart=always \
         blog/online \
         supervisord -c etc/supervisord.conf
