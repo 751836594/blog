@@ -22,6 +22,8 @@ docker run \
         -h $1 \
         --dns=10.1.1.75 \
         --dns=202.96.209.5 \
+        --dns=8.8.8.8 \
+        --dns=114.114.114.114 \
         --privileged \
         --cap-add SYS_PTRACE \
         \
