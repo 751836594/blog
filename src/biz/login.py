@@ -32,5 +32,5 @@ def set_login(uuid):
     :param uuid:
     :return:
     """
-    cookie_str = generate_cookie(uuid)
+    cookie_str = generate_cookie(str(uuid))
     return cookie_str
