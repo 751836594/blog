@@ -61,7 +61,7 @@ def auth_qq():
 
         result = user.is_exist(openid)
         if result['status']:
-            login_cookie_uuid = _login.set_login(result['uuid'])
+            login_cookie_uuid = _login.set_login(result['result']['uuid'])
             expires_time = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
             Response.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
         else:
