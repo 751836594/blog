@@ -13,10 +13,10 @@
 """
 
 db_config = {
-    'host': '127.0.0.1',
+    'host': '172.17.0.3',
     'db': 'blog',  # www
     'user': 'root',
-    'passwd': 'Lujunwen945..',
+    'passwd': 'lujunwen945..',
     'charset': 'utf8',
     'port': 3306,
 }
