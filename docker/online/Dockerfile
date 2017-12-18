@@ -1,5 +1,5 @@
-FROM docker.8gongli.com:5000/base-python3:alpine-online
-MAINTAINER steven "lujunwen@wealink.com"
+FROM 751836594/python3
+MAINTAINER steven "751836594@qq.com"
 
 # pip install
 ADD ./requirements.txt /requirements.txt
