@@ -41,12 +41,12 @@ def auth_qq():
     code = request.args.get('code')
     if not code:
         # 获取code
-        url = get_qq_code_url()
-        return redirect(url)
+        code_url = get_qq_code_url()
+        return redirect(code_url)
     else:
         # 获取access_token
-        url = get_qq_access_token_url(code)
-        resp = urllib.request.urlopen(url)
+        access_token_url = get_qq_access_token_url(code)
+        resp = urllib.request.urlopen(access_token_url)
         v = resp.read().decode('utf8')
         access_token = v[13:45]
 
@@ -57,10 +57,10 @@ def auth_qq():
         start_index = s_index + 9
         end_index = s_index + 9 + 32
         openid = res[start_index:end_index]
-
-        is_exist = user.is_exist(openid)
-        if not is_exist:
-            return '已存在'
-
-        uid = user.add(openid)
-        return '新增用户uid:%d' % (uid)
+        return openid
+        # is_exist = user.is_exist(openid)
+        # if not is_exist:
+        #     return '已存在'
+        #
+        # uid = user.add(openid)
+        # return '新增用户uid:%d' % (uid)
