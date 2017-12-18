@@ -9,8 +9,9 @@
 <script>
     $(function () {
         setTimeout(function () {
-            alert(1);
+            alert('登录成功');
             window.close();
+            this.opener.location.reload();
         }, 100)
     })
 </script>
