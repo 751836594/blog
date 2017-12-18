@@ -15,6 +15,8 @@ import urllib
 import urllib.request
 
 from datetime import timedelta, datetime
+
+from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import request, Response
@@ -63,11 +65,11 @@ def auth_qq():
         if result['status']:
             login_cookie_uuid = _login.set_login(result['result']['uuid'])
             expires_time = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
-            Response.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
         else:
             add_result = user.add(openid)
             login_cookie_uuid = _login.set_login(add_result['uuid'])
             expires_time = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
-            Response.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
 
-        return render_template('<script>window.onunload=function(){this.opener.location.reload();}</script>')
+        resp = make_response(render_template('auth.html'))
+        resp.set_cookie(key='uuid', value=login_cookie_uuid, expires=expires_time, domain='/')
+        return resp
