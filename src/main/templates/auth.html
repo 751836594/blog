@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 </head>
 <body>
 <script>
-    window.close();
+    $(function () {
+        setTimeout(function () {
+            alert(1);
+            window.close();
+        }, 100)
+    })
 </script>
 </body>
 </html>
