@@ -12,5 +12,4 @@ from flask import Flask
 
 app = Flask(__name__)
 # 加载配置
-
 from main import view, other
