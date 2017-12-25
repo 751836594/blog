@@ -12,6 +12,7 @@
 @time: 2017/12/13 上午11:18
 """
 import urllib
+import logging
 import urllib.request
 
 from datetime import timedelta, datetime
@@ -25,6 +26,13 @@ from urllib3 import response
 from biz import user, login as _login
 from biz.auth import *
 from . import app
+
+app_log = logging.getLogger('app_web')
+
+
+@app.before_request
+def before_request():
+    app_log.info('aaaaaaa')
 
 
 @app.route('/')

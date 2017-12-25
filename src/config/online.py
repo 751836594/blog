@@ -11,6 +11,12 @@
 @file: online.py
 @time: 2017/12/13 下午2:01
 """
+from logging.config import dictConfig
+from os.path import abspath, dirname
+
+import logging
+
+import time
 
 db_config = {
     'host': '172.17.0.3',
@@ -48,3 +54,55 @@ db_params = dict(
     logging_name='sqlalchemy',
 
 )
+
+BASE_PATH = abspath(dirname(abspath(__file__)) + "/../../")
+
+# 日志配置
+logging_config = dict(
+    version=1,
+    formatters={
+        'f': {
+            'format': '%(asctime)s %(name)s [mod=%(module)s.%(funcName)s:%(lineno)d] %(process)d %(levelname)-8s   %(message)s'},
+        'file_format': {
+            'format': '%(asctime)s %(name)s [mod=%(module)s.%(funcName)s:%(lineno)d] [pid=%(process)d] %(levelname)-8s %(message)s'
+        },
+        'alert': {
+            'format': '%(asctime)s %(name)s [mod=%(module)s.%(funcName)s:%(lineno)d:%(pathname)s] [pid=%(process)d] %(levelname)-8s %(message)s'
+        },
+    },
+    handlers={
+        'std': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'f',
+            'level': logging.DEBUG},
+        'file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'formatter': 'file_format',
+            'when': 'D',
+            'filename': BASE_PATH + '/logs/app.log',
+            'level': logging.DEBUG},
+        'file_app_web': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'formatter': 'file_format',
+            'when': 'D',
+            'filename': BASE_PATH + '/logs/file_app_web-%s.log' % (
+                time.strftime('%Y-%m-%d', time.localtime(time.time()))),
+            'level': logging.DEBUG,
+        },
+    },
+    loggers={
+        'app_web': {
+            'level': logging.DEBUG,
+            'handlers': ['std', 'file', 'file_app_web'],
+        },
+
+    }
+)
+
+
+def log_conf(n=''):
+    dictConfig(logging_config)
+
+
+# logging.basicConfig(level=logging.DEBUG)
+log_conf()
