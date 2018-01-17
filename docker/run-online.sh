@@ -41,4 +41,4 @@ docker run \
         supervisord -c etc/supervisord.conf
 
 
-docker run -d  --net="host"  --name=mysql --env="MYSQL_ROOT_PASSWORD=lujunwen" --publish 3306:3306 mysql
+docker run -d  --name=mysql --env="MYSQL_ROOT_PASSWORD=lujunwen" --publish 3306:3306 mysql
