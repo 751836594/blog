@@ -39,6 +39,3 @@ docker run \
         -d --restart=always \
         blog/online \
         supervisord -c etc/supervisord.conf
-
-
-docker run -d  --name=mysql --env="MYSQL_ROOT_PASSWORD=lujunwen" --publish 3306:3306 mysql
