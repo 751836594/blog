@@ -18,9 +18,11 @@ import urllib.request
 
 from datetime import timedelta, datetime
 
+import flask
 from flask import make_response
 from flask import redirect
 from flask import render_template
+
 from flask import request, Response
 from urllib3 import response
 
@@ -33,20 +35,20 @@ app_log = logging.getLogger('app_web')
 
 @app.before_request
 def before_request():
-    name = request.cookies.get('uuid')
-    if name:
-        return name
+    pass
+
 
 @app.route('/')
 def index():
+    uuid = request.cookies.get('uuid')
     return render_template('index.html')
 
 
 @app.route('/login/index')
 def login():
     auth_list = get_detail()
-
-    return render_template('login.html', auth_list=auth_list, host=HOST)
+    uuid = request.cookies.get('uuid')
+    return render_template('login.html', auth_list=auth_list, host=HOST, uuid=uuid)
 
 
 @app.route('/site/auth', methods=['POST', 'GET'])
