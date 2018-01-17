@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 
+docker build \
+        --rm=true \
+        -f ./docker/online/Dockerfile \
+        -t blog/online .
+
+
 if [ ! -n "$1" ]
 then
     echo '请指定容器名称'
@@ -33,3 +39,6 @@ docker run \
         -d --restart=always \
         blog/online \
         supervisord -c etc/supervisord.conf
+
+
+docker run -d  --net="host"  --name=mysql --env="MYSQL_ROOT_PASSWORD=lujunwen" --publish 3306:3306 mysql
