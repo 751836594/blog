@@ -108,6 +108,7 @@ ENV/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+src/config/online
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
