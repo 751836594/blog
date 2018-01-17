@@ -19,10 +19,10 @@ import logging
 import time
 
 db_config = {
-    'host': '172.17.0.3',
+    'host': '120.77.40.190',
     'db': 'blog',  # www
     'user': 'root',
-    'passwd': 'lujunwen945..',
+    'passwd': 'lujunwen.',
     'charset': 'utf8',
     'port': 3306,
 }

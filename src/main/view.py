@@ -11,6 +11,7 @@
 @file: view.py
 @time: 2017/12/13 上午11:18
 """
+import json
 import urllib
 import logging
 import urllib.request
@@ -32,8 +33,9 @@ app_log = logging.getLogger('app_web')
 
 @app.before_request
 def before_request():
-    app_log.info('aaaaaaa')
-
+    name = request.cookies.get('uuid')
+    if name:
+        return name
 
 @app.route('/')
 def index():
