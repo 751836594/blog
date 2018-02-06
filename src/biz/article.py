@@ -25,24 +25,23 @@ def article_list(page, limit=10):
     offset = (page - 1) * limit
 
     with DbHelper() as conn:
-        sql = "select  * from article  limit %s,%s "
+        sql = "select SQL_CALC_FOUND_ROWS  * from article  limit %s,%s "
         params = [offset, limit]
         result_list = select_all(conn, sql, params)
 
         total_sql = "select FOUND_ROWS() as cnt"
-        total_res = select_one(conn, total_sql);
+        total_res = select_one(conn, total_sql)
 
         res = {
             'result_list': result_list,
             'total': total_res['cnt']
         }
-
         return res
 
 
 def get_last_article(limit):
     with DbHelper() as conn:
-        sql = "select SQL_CALC_FOUND_ROWS * from article  ORDER by id desc limit %s  "
+        sql = "select  * from article  ORDER by id desc limit %s  "
         params = [limit]
         result_list = select_all(conn, sql, params)
 
