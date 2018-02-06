@@ -14,7 +14,7 @@
 from tools.db_helper import *
 
 
-def article_list(page, limit=20):
+def article_list(page, limit=10):
     """
     获取文章列表
     :return:
