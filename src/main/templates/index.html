@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <!--左边-->
-                <main class="col-md-12">
+                <main class="col-md-8">
                     {% for item in result_list %}
                         <article class="post post-1">
                             <header class="entry-header">
@@ -26,28 +26,24 @@
                             </div>
                         </article>
                     {% endfor %}
-{#                    <!-- 简单分页效果#}
+                    {#                    <!-- 简单分页效果#}
 
                     {% import 'page.html' as pagehtml %}
                     {{ pagehtml.render_name(page) }}
-{#                    --> #}
+                    {#                    --> #}
                 </main>
                 <!--右边-->
-{#                <aside class="col-md-4">#}
-{#                    <div class="widget widget-recent-posts">#}
-{#                        <h3 class="widget-title">最新文章</h3>#}
-{#                        <ul>#}
-{#                            <li>#}
-{#                                <a href="#">Django 博客开发入门教程：前言</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">Django 博客使用 Markdown 自动生成文章目录</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">部署 Django 博客</a>#}
-{#                            </li>#}
-{#                        </ul>#}
-{#                    </div>#}
+                <aside class="col-md-4">
+                    <div class="widget widget-recent-posts">
+                        <h3 class="widget-title">最新文章</h3>
+                        <ul>
+                            {% for article in  last_article %}
+                                <li>
+                                    <a href="{{ url_for('.detail',uuid=article['uuid']) }}">{{ article['title'] }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 {#                    <div class="widget widget-archives">#}
 {#                        <h3 class="widget-title">归档</h3>#}
 {#                        <ul>#}
@@ -76,45 +72,20 @@
 {#                            </li>#}
 {#                        </ul>#}
 {#                    </div>#}
-{#                    <div class="widget widget-tag-cloud">#}
-{#                        <h3 class="widget-title">标签云</h3>#}
-{#                        <ul>#}
-{#                            <li>#}
-{#                                <a href="#">Django</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">Python</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">Java</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">笔记</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">文档</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">AngularJS</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">CSS</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">JavaScript</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">Snippet</a>#}
-{#                            </li>#}
-{#                            <li>#}
-{#                                <a href="#">jQuery</a>#}
-{#                            </li>#}
-{#                        </ul>#}
-{#                    </div>#}
-{#                    <div class="rss">#}
-{#                        <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>#}
-{#                    </div>#}
-{#                </aside>#}
+                    <div class="widget widget-tag-cloud">
+                        <h3 class="widget-title">标签云</h3>
+                        <ul>
+                            {% for type in type_list %}
+                            <li>
+                                <a href="#">{{ type['type'] }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="rss">
+                        <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                    </div>
+                </aside>
             </div>
         </div>
     </div>

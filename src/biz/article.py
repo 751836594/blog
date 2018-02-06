@@ -25,8 +25,8 @@ def article_list(page, limit=20):
     offset = (page - 1) * limit
 
     with DbHelper() as conn:
-        sql = "select SQL_CALC_FOUND_ROWS * from article  limit %s,%s "
-        params = [offset,limit]
+        sql = "select  * from article  limit %s,%s "
+        params = [offset, limit]
         result_list = select_all(conn, sql, params)
 
         total_sql = "select FOUND_ROWS() as cnt"
@@ -38,3 +38,19 @@ def article_list(page, limit=20):
         }
 
         return res
+
+
+def get_last_article(limit):
+    with DbHelper() as conn:
+        sql = "select SQL_CALC_FOUND_ROWS * from article  ORDER by create_time desc limit %s  "
+        params = [limit]
+        result_list = select_all(conn, sql, params)
+
+        return result_list
+
+
+def get_type():
+    with DbHelper() as conn:
+        sql = "select  DISTINCT type from article "
+        result_list = select_all(conn, sql)
+        return result_list

@@ -46,8 +46,11 @@ def index(page=1):
     res = article_list(page)
     if not res['result_list'] and res['total'] > 0:
         return redirect('/')
+
+    last_article = get_last_article(5)
+    type_list = get_type()
     page = format_page(page=page, limit=limit, total=res['total'])
-    return render_template('index.html', result_list=res['result_list'], total=res['total'], page=page)
+    return render_template('index.html', result_list=res['result_list'], total=res['total'], page=page,last_article=last_article,type_list=type_list)
 
 
 @app.route('/detail/<int:uuid>')
