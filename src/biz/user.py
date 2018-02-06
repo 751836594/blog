@@ -14,9 +14,10 @@
 import datetime
 import uuid
 
-from tools.helper import create_conn, get_new_db, insert_rs
+from tools.db_helper import *
 
-conn = create_conn()
+
+# conn = create_conn()
 
 
 def is_exist(qq_open_id):
@@ -26,10 +27,10 @@ def is_exist(qq_open_id):
     :return:
     """
     status = False
-    sql = '''select * from user where qq_open_id =:qq_open_id'''
-    params = {'qq_open_id': qq_open_id}
-    with get_new_db() as db:
-        result = db.execute(sql, params).fetchone()
+    sql = '''select * from user where qq_open_id =%s'''
+    params = [qq_open_id]
+    with DbHelper() as conn:
+        result = select_one(conn, sql, params)
 
     if result:
         status = True
@@ -50,6 +51,6 @@ def add(qq_open_id):
         'create_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
         'last_login_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%d:%m'),
     }
-
-    uid = insert_rs(conn, 'user', params)
-    return {'uid': uid, 'uuid': uuid_str}
+    with DbHelper() as conn:
+        uid = insert_row(conn, 'user', params)
+        return {'uid': uid, 'uuid': uuid_str}

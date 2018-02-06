@@ -11,26 +11,28 @@
 @file: view.py
 @time: 2017/12/13 上午11:18
 """
-import json
+import html
 import urllib
-import logging
 import urllib.request
 
 from datetime import timedelta, datetime
 
-import flask
 from flask import make_response
 from flask import redirect
 from flask import render_template
-
-from flask import request, Response
-from urllib3 import response
+from flask import request
 
 from biz import user, login as _login
 from biz.auth import *
+from biz.article import *
+from biz.content import *
 from . import app
+from tools.page import format_page
+
 
 app_log = logging.getLogger('app_web')
+
+limit = 10
 
 
 @app.before_request
@@ -39,9 +41,22 @@ def before_request():
 
 
 @app.route('/')
-def index():
-    uuid = request.cookies.get('uuid')
-    return render_template('index.html')
+@app.route('/article/<int:page>')
+def index(page=1):
+    res = article_list(page)
+    if not res['result_list'] and res['total'] > 0:
+        return redirect('/')
+    page = format_page(page=page, limit=limit, total=res['total'])
+    return render_template('index.html', result_list=res['result_list'], total=res['total'], page=page)
+
+
+@app.route('/detail/<int:uuid>')
+def detail(uuid):
+    res = get_article_detail(uuid=uuid)
+    if not res:
+        return redirect('/')
+    md = res['content']
+    return render_template('detail.html', html=md)
 
 
 @app.route('/login/index')

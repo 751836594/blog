@@ -16,3 +16,4 @@ XlsxWriter==0.9.8
 xlrd==1.1.0
 redis==2.10.6
 requests
+PyMySQL==0.8.0

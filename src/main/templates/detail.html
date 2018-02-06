@@ -1,0 +1,14 @@
+{% extends  'layout.html' %}
+{% block body %}
+    <xmp theme="united" style="display:none;">
+    {{ html }}
+    </xmp>
+    <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+    <script>
+        $(function () {
+           $('#headline').remove();
+           $('.navbar-inner').remove();
+        });
+    </script>
+{% endblock %}
+

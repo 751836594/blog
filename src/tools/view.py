@@ -12,9 +12,5 @@
 @time: 2018/1/17 下午5:49
 """
 
-from flask import render_template
 
 
-def display(html, **context):
-    uuid = 1
-    render_template(html, **context, uuid=uuid)

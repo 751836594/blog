@@ -1,0 +1,8 @@
+{% macro render_name(page) %}
+<div class="pagination-simple">
+    <a href="{{ url_for('.index',page=page['prev_page']) }}">上一页</a>
+    <span class="current">第 {{ page['current_page'] }}  页 / 共 {{ page['total_page'] }} 页</span>
+    <a href="{{ url_for('.index',page=page['next_page']) }}">下一页</a>
+</div>
+{% endmacro %}
+
