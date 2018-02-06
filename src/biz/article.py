@@ -42,7 +42,7 @@ def article_list(page, limit=20):
 
 def get_last_article(limit):
     with DbHelper() as conn:
-        sql = "select SQL_CALC_FOUND_ROWS * from article  ORDER by create_time desc limit %s  "
+        sql = "select SQL_CALC_FOUND_ROWS * from article  ORDER by id desc limit %s  "
         params = [limit]
         result_list = select_all(conn, sql, params)
 
