@@ -73,6 +73,7 @@ def update(conn, table, where, update_row):
     update_sql = ','.join(update_list)
     where_sql = ' and '.join(where_list)
     sql = '''update %s set %s WHERE %s''' % (table, update_sql, where_sql)
+    print(sql)
     cur = conn.cursor()
     res = cur.execute(sql, params)
     conn.commit()

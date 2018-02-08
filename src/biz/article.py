@@ -53,3 +53,13 @@ def get_type():
         sql = "select  DISTINCT type from article "
         result_list = select_all(conn, sql)
         return result_list
+
+
+def update_article_pv(uuid):
+    with DbHelper() as conn:
+        sql = '''select pv from article where uuid = %s'''
+        params = [uuid]
+        res = select_one(conn,sql,params)
+        pv = int(res['pv']) + 1
+        resp = update(conn, 'article', {'uuid': uuid}, {'pv': pv})
+        return resp

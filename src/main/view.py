@@ -59,6 +59,8 @@ def detail(uuid):
     if not res:
         return redirect('/')
     md = res['content']
+    #PV更新
+    update_article_pv(uuid)
     return render_template('detail.html', html=md)
 
 
