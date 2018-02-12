@@ -29,7 +29,6 @@ from biz.content import *
 from . import app
 from tools.page import format_page
 
-
 app_log = logging.getLogger('app_web')
 
 limit = 10
@@ -50,7 +49,8 @@ def index(page=1):
     last_article = get_last_article(5)
     type_list = get_type()
     page_html = format_page(page=page, limit=limit, total=res['total'])
-    return render_template('index.html', result_list=res['result_list'], total=res['total'], page=page_html,last_article=last_article,type_list=type_list)
+    return render_template('index.html', result_list=res['result_list'], total=res['total'], page=page_html,
+                           last_article=last_article, type_list=type_list)
 
 
 @app.route('/detail/<int:uuid>')
@@ -59,7 +59,7 @@ def detail(uuid):
     if not res:
         return redirect('/')
     md = res['content']
-    #PV更新
+    # PV更新
     update_article_pv(uuid)
     return render_template('detail.html', html=md)
 
